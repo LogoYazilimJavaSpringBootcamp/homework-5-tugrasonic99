@@ -1,8 +1,28 @@
 ## **HOMEWORK-5**
-1. Spring Profile nedir? Properties ya da yml dosya formları ile isbasi uygulamasına test
-profile ekleyin.(5 Puan)
-2. SQL injection örnekleyin. Nasıl korunabiliriz?(5 Puan)
-3. Aşağıdaki kurallara göre bir film öneri uygulaması yazın. (90 Puan)
+# 1. Spring Profile nedir? Properties ya da yml dosya formları ile isbasi uygulamasına test profile ekleyin.(5 Puan)
+
+Bir Spring projesinde kullanılan sınıf, bean, component ve configuration üyelerinin amaçlarını belirterek onların kontrolünü kolaylaştıran bir yöntem sağlar. Spesifik bir profile göre üretim ve test ortamları çerçevesinde profiller bazında gerekli üyelerin kontrol eder.
+
+# 2. SQL injection örnekleyin. Nasıl korunabiliriz?(5 Puan)
+
+SQL Injection, Database tabanlı uygulamalardan hassas veri çalabilmek amacıyla kullanılan ataklardan biridir. Bu yöntemi kullananan biri, birkaç farklı yöntem ile Database'e saldırabilir. Önemli yöntemlerden biri, Database'e direkt gönderilen query üzerinde gerçekleşebilir. Örneğin tek bir kullanıcının hassas bilgisini çekmek adına kullanılan bir query'e OR kapısı ve true statement ile tüm kullanıcıların hassas bilgilerini çekebilir.
+```
+SELECT * FROM Users WHERE UserId = 105 OR 1=1;
+```
+
+Bir farklı örnek ise girilen parametrenin erişilebilmesidir. Bu parametre dış kullanıcı tarafından manipule edilip farklı hassas değerler elde edilebilir. Örneğin aşağıdaki sql query'sinde email değeri değiştirilip, farklı hassas değerlere ulaşılabilir.
+
+```
+String sql = "SELECT * FROM users WHERE email = '" + email + "'";
+
+```
+
+Bu ataklardan korunmanın bazı yolları var. Örneğin:
+* Kullanılan uygulamalara erişim yetkisi dağıtma. Bunun anlamı hangi servislerin ne yapmaya yetkisi olabileceğini(INSERT, UPDATE, DELETE) belirlemektir.
+* Birden fazla Database kullanmak.
+* Verilerin bütünlüğünü sürekli kontrol etmek.
+
+# 3. Aşağıdaki kurallara göre bir film öneri uygulaması yazın. (90 Puan)
 
 ### **Teknolojiler;**
 * Min Java8
