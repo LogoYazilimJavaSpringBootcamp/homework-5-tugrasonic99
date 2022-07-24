@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Movie {
+public class Movie {// Film sınıfı. Film adı, kim tarafındak koyulduğu ve içerisine yapılan yorumları barındıracak.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,9 +20,7 @@ public class Movie {
 	private String movieName;
 	@Column
 	private String addedBy;
-	@OneToMany
-	@JoinColumn(name = "com_id", insertable = true, updatable = false)
-	private List<Comment> commentList;
+	
 	
 	
 	
@@ -44,12 +42,7 @@ public class Movie {
 	public void setAddedBy(String addedBy) {
 		this.addedBy = addedBy;
 	}
-	public List<Comment> getCommentList() {
-		return commentList;
-	}
-	public void setCommentList(List<Comment> commentList) {
-		this.commentList = commentList;
-	}
+	
 	
 	
 	

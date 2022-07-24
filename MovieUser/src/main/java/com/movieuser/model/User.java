@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User {// Kullanıcı sınıfı. isim, email ve şifre değerleri dışında üyelik sınıfı, gelen emailler ve girilen filmleri de içerecek.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,16 +27,18 @@ public class User {
 	private String email;
 	@Column
 	private String password;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "member_id", insertable = true, updatable = false)
-	private Membership membership;
+	@Column
+	private String membershipType;// Switch case ile 2 durum olacak şekilde tasarlandı. 1:"Free",2"Paid".
+	@Column
+	private int membershipTime;// Switch case ile 0-3-6-9-12 ay olacak şekilde hazırlandı
+	@Column
+	private int movieCount;// Film sayısı kullanıcının üyelik tipine göre film eklemede yardımcı olacak.
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "email_id", insertable = true, updatable = false)
-	private List<Email> receivedEmails;
+	private List<Email> receivedEmails;// Kullanıcı emailleri.
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "movie_id", insertable = true, updatable = false)
-	private List<Movie> submittedMovies;
-	// Ana fonksiyonlar:
+	private List<Movie> submittedMovies;// Kullanıcının eklediği filmler.
 	public int getUserId() {
 		return userId;
 	}
@@ -61,11 +63,45 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Membership getMembership() {
-		return membership;
+	
+	public String getMembershipType() {
+		return membershipType;
 	}
-	public void setMembership(Membership membership) {
-		this.membership = membership;
+	public void setMembershipTime(int option) {
+		switch (option) {
+		  case 1:
+		    membershipTime=3;
+		    break;
+		  case 2:
+			membershipTime=6;
+		    break;
+		  case 3:
+			membershipTime=9;
+			break;
+		  case 4:
+			membershipTime=12;
+			break;
+		  case 5:
+			membershipTime=0;
+			break;
+		  default:
+		    System.out.println("No applicable value");
+		}
+	}
+	public int getMembershipTime() {
+		return membershipTime;
+	}
+	public void setMembershipType(int option) {
+		switch (option) {
+		  case 1:
+		    membershipType="Free";
+		    break;
+		  case 2:
+			membershipType="Paid";
+		    break;
+		  default:
+		    System.out.println("No applicable value");
+		}
 	}
 	public List<Email> getReceivedEmails() {
 		return receivedEmails;
@@ -79,6 +115,17 @@ public class User {
 	public void setSubmittedMovies(List<Movie> submittedMovies) {
 		this.submittedMovies = submittedMovies;
 	}
+	public int getMovieCount() {
+		return movieCount;
+	}
+	public void setMovieCount(int movieCount) {
+		this.movieCount = movieCount;
+	}
+	public void setMembershipType(String membershipType) {
+		this.membershipType = membershipType;
+	}
+	
+	
 	
 	
 	
