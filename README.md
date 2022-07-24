@@ -1,9 +1,9 @@
-## **HOMEWORK-5**
-# 1. Spring Profile nedir? Properties ya da yml dosya formları ile isbasi uygulamasına test profile ekleyin.(5 Puan)
+# **HOMEWORK-5**
+## 1. Spring Profile nedir? Properties ya da yml dosya formları ile isbasi uygulamasına test profile ekleyin.(5 Puan)
 
 Bir Spring projesinde kullanılan sınıf, bean, component ve configuration üyelerinin amaçlarını belirterek onların kontrolünü kolaylaştıran bir yöntem sağlar. Spesifik bir profile göre üretim ve test ortamları çerçevesinde profiller bazında gerekli üyelerin kontrol eder.
 
-# 2. SQL injection örnekleyin. Nasıl korunabiliriz?(5 Puan)
+## 2. SQL injection örnekleyin. Nasıl korunabiliriz?(5 Puan)
 
 SQL Injection, Database tabanlı uygulamalardan hassas veri çalabilmek amacıyla kullanılan ataklardan biridir. Bu yöntemi kullananan biri, birkaç farklı yöntem ile Database'e saldırabilir. Önemli yöntemlerden biri, Database'e direkt gönderilen query üzerinde gerçekleşebilir. Örneğin tek bir kullanıcının hassas bilgisini çekmek adına kullanılan bir query'e OR kapısı ve true statement ile tüm kullanıcıların hassas bilgilerini çekebilir.
 ```
@@ -22,7 +22,7 @@ Bu ataklardan korunmanın bazı yolları var. Örneğin:
 * Birden fazla Database kullanmak.
 * Verilerin bütünlüğünü sürekli kontrol etmek.
 
-# 3. Aşağıdaki kurallara göre bir film öneri uygulaması yazın. (90 Puan)
+## 3. Aşağıdaki kurallara göre bir film öneri uygulaması yazın. (90 Puan)
 
 ### **Teknolojiler;**
 * Min Java8
@@ -50,3 +50,10 @@ gereklidir.)
 * Ödeme servisi sadece ödeme bilgilerini kaydeder ve başarılı response döner.
 * Email gönderme işlemi asenkron gerçekleşmelidir.
 * Üyelikler 1-3-6-12 ay olarak alınabilir.
+
+## Proje Açıklaması
+MovieUser, kullanıcı ile ilgili işlemlerin halledildiği projedir. Kullanıcı bilgileri, üyelik bilgileri, alınan emailler ve girilen filmleri içerir. Üyelik işlemleri, ödeme(membership) işlemleri gibi işlemler burada gerçekleşir. Ödeme senkron gerçekleşir. Öncelikle bazı entity'lerin kurulması adına bu projenin çalıştırılması gerekir.
+
+MovieHome, filmlerin ve onlara ait bilgilerin işlendiği projedir. Filmlerle ilgili tüm işlemler burada yapılır. Film girildiği zaman, RabbitMQ üzerinden bilgiler MovieUser'a gönderilir ve burada herkese email gönderilir. Bu işlem asenkron olarak gerçekleşir.
+
+NOT: Maalesef MovieHome'da kullandığım JDBC tarafında bir sorun yaşadım. O yüzden MovieHome tarafında herhangi bir bilgi alışverişi olmamaktadır.
